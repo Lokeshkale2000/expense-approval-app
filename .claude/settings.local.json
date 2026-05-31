@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"d:\\\\repos\\\\React Test\\\\Mohite\\\\payment-processing-system\\\\src\\\\config\")",
+      "Bash(mkdir -p \"d:\\\\repos\\\\React Test\\\\Mohite\\\\payment-processing-system\\\\src\\\\models\")",
+      "Bash(mkdir -p \"d:\\\\repos\\\\React Test\\\\Mohite\\\\payment-processing-system\\\\src\\\\controllers\")",
+      "Bash(mkdir -p \"d:\\\\repos\\\\React Test\\\\Mohite\\\\payment-processing-system\\\\src\\\\services\")",
+      "Bash(mkdir -p \"d:\\\\repos\\\\React Test\\\\Mohite\\\\payment-processing-system\\\\src\\\\middleware\")",
+      "Bash(npm install *)"
+    ]
+  }
+}
