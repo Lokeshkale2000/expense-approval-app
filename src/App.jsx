@@ -3,7 +3,7 @@ import { ExpenseProvider } from './context/ExpenseContext';
 import Sidebar from './components/layout/Sidebar';
 import ReportsPage from './components/reports/ReportsPage';
 import ReportDetailPage from './components/report-detail/ReportDetailPage';
-import styles from './App.module.css';
+import './App.css';
 
 function PlaceholderPage({ title }) {
   return (
@@ -17,9 +17,9 @@ export default function App() {
   return (
     <ExpenseProvider>
       <BrowserRouter>
-        <div className={styles.layout}>
+        <div className="layout">
           <Sidebar />
-          <main className={styles.main}>
+          <main className="main">
             <Routes>
               <Route path="/expenses" element={<ReportsPage />} />
               <Route path="/expenses/all" element={<ReportsPage />} />

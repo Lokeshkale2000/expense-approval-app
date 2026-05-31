@@ -5,7 +5,7 @@ import { useExpense } from '../../context/ExpenseContext';
 import Avatar from '../ui/Avatar';
 import Badge from '../ui/Badge';
 import { formatAmount } from '../../utils/helpers';
-import styles from './ReportsPage.module.css';
+import './ReportsPage.css';
 
 const TABS = [
   { key: 'pending', label: 'Pending' },
@@ -33,52 +33,42 @@ export default function ReportsPage() {
   });
 
   return (
-    <div className={styles.page}>
-      <div className={styles.breadcrumb}>
+    <div className="page">
+      <div className="breadcrumb">
         <Link to="#">Bill Approver</Link>
-        <span className={styles.breadcrumbSep}>›</span>
+        <span className="breadcrumbSep">›</span>
         <span>Dec-2025</span>
       </div>
 
-      <div className={styles.content}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>Reports</h1>
+      <div className="content">
+        <div className="header">
+          <h1 className="title">Reports</h1>
         </div>
 
-        <div className={styles.tableContainer}>
-          <div className={styles.toolbar}>
-            <div className={styles.tabs}>
+        <div className="tableContainer">
+          <div className="toolbar">
+            <div className="tabs">
               {TABS.map((tab) => (
                 <button
                   key={tab.key}
-                  className={`${styles.tab}${activeTab === tab.key ? ` ${styles.activeTab}` : ""}`}
+                  className={`tab${activeTab === tab.key ? ' activeTab' : ''}`}
                   onClick={() =>
-                    navigate(
-                      tab.key === "pending"
-                        ? "/expenses/pending"
-                        : "/expenses/all",
-                    )
+                    navigate(tab.key === 'pending' ? '/expenses/pending' : '/expenses/all')
                   }
                 >
                   {tab.label}
-                  <span className={styles.tabCount}>
-                    {tab.key === "pending"
-                      ? `0${pendingCount}`
-                      : reports.length}
+                  <span className="tabCount">
+                    {tab.key === 'pending' ? `0${pendingCount}` : reports.length}
                   </span>
-                  {tab.key === "all" && <ChevronDown size={14} />}
+                  {tab.key === 'all' && <ChevronDown size={14} />}
                 </button>
               ))}
             </div>
 
-            <div className={styles.toolbarRight}>
-              <button className={styles.iconBtn} title="Refresh">
-                <RefreshCw size={14} />
-              </button>
-              <button className={styles.iconBtn} title="Sort">
-                <ArrowDownUp size={14} />
-              </button>
-              <div className={styles.searchWrap}>
+            <div className="toolbarRight">
+              <button className="iconBtn" title="Refresh"><RefreshCw size={14} /></button>
+              <button className="iconBtn" title="Sort"><ArrowDownUp size={14} /></button>
+              <div className="searchWrap">
                 <input
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
@@ -88,8 +78,9 @@ export default function ReportsPage() {
               </div>
             </div>
           </div>
-          <div className={styles.tableWrap}>
-            <table className={styles.table}>
+
+          <div className="tableWrap">
+            <table className="table">
               <thead>
                 <tr>
                   <th>SR NO.</th>
@@ -105,63 +96,41 @@ export default function ReportsPage() {
                 {filtered.length === 0 ? (
                   <tr>
                     <td colSpan={7}>
-                      <div className={styles.emptyState}>No reports found.</div>
+                      <div className="emptyState">No reports found.</div>
                     </td>
                   </tr>
                 ) : (
                   filtered.map((report) => (
                     <tr key={report.id}>
+                      <td><span className="srNo">{report.srNo}</span></td>
                       <td>
-                        <span className={styles.srNo}>{report.srNo}</span>
-                      </td>
-                      <td>
-                        <div className={styles.employeeCell}>
-                          <div className={styles.employeeInfo}>
+                        <div className="employeeCell">
+                          <div className="employeeInfo">
                             <Avatar initials={report.employee.initials} size="sm" />
-                            <span className={styles.employeeName}>{report.employee.name}</span>
+                            <span className="employeeName">{report.employee.name}</span>
                           </div>
-                          <div className={styles.employeeId}>
-                            Emp. ID - {report.employee.empId.replace("EMP-", "")}
+                          <div className="employeeId">
+                            Emp. ID - {report.employee.empId.replace('EMP-', '')}
                           </div>
                         </div>
                       </td>
                       <td>
-                        <div className={styles.reportCell}>
-                          <span
-                            className={styles.reportLink}
-                            onClick={() =>
-                              navigate(`/expenses/report/${report.id}`)
-                            }
-                          >
+                        <div className="reportCell">
+                          <span className="reportLink" onClick={() => navigate(`/expenses/report/${report.id}`)}>
                             {report.reportName}
                           </span>
-                          <span className={styles.uploadDate}>
-                            Uploaded on - {report.uploadedOn}
-                          </span>
+                          <span className="uploadDate">Uploaded on - {report.uploadedOn}</span>
                         </div>
                       </td>
+                      <td><span className="billCount">{report.bills.length}</span></td>
                       <td>
-                        <span className={styles.billCount}>
-                          {report.bills.length}
-                        </span>
-                      </td>
-                      <td>
-                        <div className={styles.approverCell}>
-                          <Avatar
-                            initials={report.approver.initials}
-                            size="sm"
-                          />
+                        <div className="approverCell">
+                          <Avatar initials={report.approver.initials} size="sm" />
                           {report.approver.name}
                         </div>
                       </td>
-                      <td>
-                        <Badge status={report.status} />
-                      </td>
-                      <td>
-                        <span className={styles.amount}>
-                          {formatAmount(report.totalAmount)}
-                        </span>
-                      </td>
+                      <td><Badge status={report.status} /></td>
+                      <td><span className="amount">{formatAmount(report.totalAmount)}</span></td>
                     </tr>
                   ))
                 )}

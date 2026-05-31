@@ -7,15 +7,9 @@ import {
   ACCEPTED_FILE_TYPES,
   isImageType,
 } from "../../utils/helpers";
-import styles from "./BillItem.module.css";
+import "./BillItem.css";
 
-export default function BillItem({
-  bill,
-  reportId,
-  checked,
-  onToggle,
-  onViewDetails,
-}) {
+export default function BillItem({ bill, reportId, checked, onToggle, onViewDetails }) {
   const { approveBill, rejectBill, uploadBillFile } = useExpense();
   const inputRef = useRef(null);
 
@@ -34,74 +28,57 @@ export default function BillItem({
   const isPending = bill.status === "pending";
 
   return (
-    <div className={styles.item}>
-      {/* Checkbox */}
+    <div className="item">
       <input
         type="checkbox"
-        className={styles.checkbox}
+        className="checkbox"
         checked={checked}
         onChange={() => onToggle(bill.id)}
       />
 
-      {/* Preview */}
       <div
-        className={styles.preview}
+        className="preview"
         onClick={() => inputRef.current?.click()}
         title="Click to upload"
       >
         {bill.fileData ? (
           isImageType(bill.fileType) ? (
-            <img
-              src={bill.fileData}
-              alt="bill"
-              className={styles.previewImage}
-            />
+            <img src={bill.fileData} alt="bill" className="previewImage" />
           ) : (
-            <div className={styles.previewPlaceholder}>
+            <div className="previewPlaceholder">
               <div>📄</div>
               <div>{bill.fileName}</div>
             </div>
           )
         ) : (
-          <div className={styles.previewPlaceholder}>
+          <div className="previewPlaceholder">
             Preview
-            <div className={styles.previewUpload}>+ Upload</div>
+            <div className="previewUpload">+ Upload</div>
           </div>
         )}
         <input
           ref={inputRef}
           type="file"
           accept={ACCEPTED_FILE_TYPES}
-          className={styles.fileInput}
+          className="fileInput"
           onChange={handleFileChange}
         />
       </div>
 
-      {/* Body */}
-      <div className={styles.body}>
-        <div className={styles.meta}>Uploaded on - {bill.uploadedOn}</div>
+      <div className="body">
+        <div className="meta">Uploaded on - {bill.uploadedOn}</div>
 
-        <div className={styles.bodyMain}>
-          {/* Left: title + reject/accept or badge */}
-          <div className={styles.titleSection}>
-            <span
-              className={styles.billTitle}
-              onClick={() => onViewDetails(bill.id)}
-            >
+        <div className="bodyMain">
+          <div className="titleSection">
+            <span className="billTitle" onClick={() => onViewDetails(bill.id)}>
               {bill.title}
             </span>
             {isPending ? (
-              <div className={styles.actionBtns}>
-                <button
-                  className={styles.btnReject}
-                  onClick={() => rejectBill(reportId, bill.id)}
-                >
+              <div className="actionBtns">
+                <button className="btnReject" onClick={() => rejectBill(reportId, bill.id)}>
                   Reject
                 </button>
-                <button
-                  className={styles.btnAccept}
-                  onClick={() => approveBill(reportId, bill.id)}
-                >
+                <button className="btnAccept" onClick={() => approveBill(reportId, bill.id)}>
                   Accept
                 </button>
               </div>
@@ -110,40 +87,21 @@ export default function BillItem({
             )}
           </div>
 
-          {/* Middle: wallet, category, merchant */}
-          <div className={styles.detailSection}>
-            <span className={`${styles.detailLabel} ${styles.walletLabel}`}>
-              Wallet
-            </span>
-            <span className={`${styles.detailLabel} ${styles.categoryLabel}`}>
-              Category
-            </span>
-            <span className={`${styles.detailValue} ${styles.walletValue}`}>
-              {bill.wallet}
-            </span>
-            <span className={`${styles.detailValue} ${styles.categoryValue}`}>
-              {bill.category}
-            </span>
-            <span className={`${styles.detailLabel} ${styles.merchantLabel}`}>
-              Merchant
-            </span>
-            <span className={`${styles.detailValue} ${styles.merchantValue}`}>
-              {bill.merchant}
-            </span>
+          <div className="detailSection">
+            <span className="detailLabel walletLabel">Wallet</span>
+            <span className="detailLabel categoryLabel">Category</span>
+            <span className="detailValue walletValue">{bill.wallet}</span>
+            <span className="detailValue categoryValue">{bill.category}</span>
+            <span className="detailLabel merchantLabel">Merchant</span>
+            <span className="detailValue merchantValue">{bill.merchant}</span>
           </div>
 
-          {/* Right: amount top, view details bottom */}
-          <div className={styles.amountCol}>
-            <div className={styles.amountBlock}>
-              <span className={styles.detailLabel}>Amount</span>
-              <span className={styles.amountValue}>
-                {formatAmount(bill.amount)}
-              </span>
+          <div className="amountCol">
+            <div className="amountBlock">
+              <span className="detailLabel">Amount</span>
+              <span className="amountValue">{formatAmount(bill.amount)}</span>
             </div>
-            <span
-              className={styles.viewDetails}
-              onClick={() => onViewDetails(bill.id)}
-            >
+            <span className="viewDetails" onClick={() => onViewDetails(bill.id)}>
               View Details
             </span>
           </div>

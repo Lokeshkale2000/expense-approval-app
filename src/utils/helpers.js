@@ -1,5 +1,5 @@
 export const formatAmount = (amount) =>
-  `Rs. ${amount.toLocaleString('en-IN')}`;
+  `Rs. ${amount}`;
 
 export const STATUS_CONFIG = {
   pending: { label: 'Pending', color: 'pending' },

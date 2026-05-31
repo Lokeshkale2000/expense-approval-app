@@ -9,7 +9,7 @@ import {
   formatAmount, readFileAsBase64, ACCEPTED_FILE_TYPES,
   isImageType, isPdfType, downloadFile,
 } from '../../utils/helpers';
-import styles from './BillPreviewModal.module.css';
+import './BillPreviewModal.css';
 
 const MIN_SCALE = 0.5;
 const MAX_SCALE = 3;
@@ -73,76 +73,76 @@ export default function BillPreviewModal({ bills, initialIndex, reportId, onClos
   const isPending = bill.status === 'pending';
 
   return (
-    <div className={styles.overlay} onClick={(e) => e.target === e.currentTarget && onClose()}>
-      <div className={styles.modal}>
+    <div className="overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
+      <div className="modal">
         {/* Header */}
-        <div className={styles.header}>
-          <span className={styles.headerTitle}>
+        <div className="header">
+          <span className="headerTitle">
             Expense Details ({currentIndex + 1} of {total})
           </span>
-          <button className={styles.closeBtn} onClick={onClose}>
+          <button className="closeBtn" onClick={onClose}>
             <X size={14} />
           </button>
         </div>
 
         {/* Body */}
-        <div className={styles.body}>
+        <div className="body">
           {/* Left: Image viewer */}
-          <div className={styles.viewerPanel}>
-            <div className={styles.viewerArea}>
+          <div className="viewerPanel">
+            <div className="viewerArea">
               {bill.fileData ? (
-                <div className={styles.imageWrap}>
+                <div className="imageWrap">
                   {isImageType(bill.fileType) ? (
                     <img
                       src={bill.fileData}
                       alt={bill.title}
-                      className={styles.billImage}
+                      className="billImage"
                       style={imgStyle}
                     />
                   ) : isPdfType(bill.fileType) ? (
                     <iframe
                       src={bill.fileData}
-                      className={styles.pdfFrame}
+                      className="pdfFrame"
                       title={bill.fileName}
                     />
                   ) : (
-                    <div className={styles.emptyPreview}>
-                      <div className={styles.emptyPreviewIcon}>📄</div>
+                    <div className="emptyPreview">
+                      <div className="emptyPreviewIcon">📄</div>
                       <div>{bill.fileName}</div>
                     </div>
                   )}
                 </div>
               ) : (
                 <div
-                  className={styles.emptyPreview}
+                  className="emptyPreview"
                   onClick={() => fileInputRef.current?.click()}
                 >
-                  <div className={styles.emptyPreviewIcon}>🖼️</div>
+                  <div className="emptyPreviewIcon">🖼️</div>
                   <span>Preview</span>
-                  <span className={styles.uploadHint}>+ Click to upload bill</span>
+                  <span className="uploadHint">+ Click to upload bill</span>
                 </div>
               )}
             </div>
 
             {/* Thumbnail strip */}
-            <div className={styles.thumbnailStrip}>
+            <div className="thumbnailStrip">
               {bills.map((b, i) => (
                 <div
                   key={b.id}
-                  className={`${styles.thumbnail}${i === currentIndex ? ` ${styles.active}` : ''}`}
+                  className={`thumbnail${i === currentIndex ? ' active' : ''}`}
                   onClick={() => switchBill(i)}
                 >
                   {b.fileData && isImageType(b.fileType) ? (
                     <img src={b.fileData} alt={b.title} />
                   ) : (
-                    <div className={styles.thumbnailPlaceholder}>
+                    <div className="thumbnailPlaceholder">
                       {b.fileData ? '📄' : 'No\nfile'}
                     </div>
                   )}
                 </div>
               ))}
               <button
-                className={styles.addBtn}
+                className="addBtn"
                 title="Upload file"
                 onClick={() => fileInputRef.current?.click()}
               >
@@ -151,13 +151,13 @@ export default function BillPreviewModal({ bills, initialIndex, reportId, onClos
             </div>
 
             {/* Controls */}
-            <div className={styles.controls}>
-              <button className={styles.ctrlBtn} onClick={zoomIn} title="Zoom in"><ZoomIn size={13} /></button>
-              <button className={styles.ctrlBtn} onClick={zoomOut} title="Zoom out"><ZoomOut size={13} /></button>
-              <button className={styles.ctrlBtn} onClick={rotateLeft} title="Rotate left"><RotateCcw size={13} /></button>
-              <button className={styles.ctrlBtn} onClick={rotateRight} title="Rotate right"><RotateCw size={13} /></button>
+            <div className="controls">
+              <button className="ctrlBtn" onClick={zoomIn} title="Zoom in"><ZoomIn size={13} /></button>
+              <button className="ctrlBtn" onClick={zoomOut} title="Zoom out"><ZoomOut size={13} /></button>
+              <button className="ctrlBtn" onClick={rotateLeft} title="Rotate left"><RotateCcw size={13} /></button>
+              <button className="ctrlBtn" onClick={rotateRight} title="Rotate right"><RotateCw size={13} /></button>
               <button
-                className={styles.ctrlBtn}
+                className="ctrlBtn"
                 onClick={handleDownload}
                 title="Download"
                 disabled={!bill.fileData}
@@ -166,7 +166,7 @@ export default function BillPreviewModal({ bills, initialIndex, reportId, onClos
                 <Download size={13} />
               </button>
               <button
-                className={`${styles.ctrlBtn} ${styles.ctrlBtnDanger}`}
+                className="ctrlBtn ctrlBtnDanger"
                 onClick={handleDelete}
                 title="Delete file"
                 disabled={!bill.fileData}
@@ -178,22 +178,22 @@ export default function BillPreviewModal({ bills, initialIndex, reportId, onClos
           </div>
 
           {/* Right: Details */}
-          <div className={styles.detailsPanel}>
-            <div className={styles.detailsTop}>
-              <div className={styles.uploadedOn}>Uploaded on - {bill.uploadedOn}</div>
-              <div className={styles.billTitleRow}>
-                <span className={styles.billTitleText}>{bill.title}</span>
+          <div className="detailsPanel">
+            <div className="detailsTop">
+              <div className="uploadedOn">Uploaded on - {bill.uploadedOn}</div>
+              <div className="billTitleRow">
+                <span className="billTitleText">{bill.title}</span>
                 <Badge status={bill.status} />
               </div>
-              <div className={styles.amountLabel}>Amount</div>
-              <div className={styles.amountValue}>{formatAmount(bill.amount)}</div>
+              <div className="amountLabel">Amount</div>
+              <div className="amountValue">{formatAmount(bill.amount)}</div>
 
               {isPending && (
-                <div className={styles.actionBtns}>
-                  <button className={styles.btnReject} onClick={() => rejectBill(reportId, bill.id)}>
+                <div className="actionBtns">
+                  <button className="btnReject" onClick={() => rejectBill(reportId, bill.id)}>
                     Reject
                   </button>
-                  <button className={styles.btnAccept} onClick={() => approveBill(reportId, bill.id)}>
+                  <button className="btnAccept" onClick={() => approveBill(reportId, bill.id)}>
                     Accept
                   </button>
                 </div>
@@ -201,15 +201,15 @@ export default function BillPreviewModal({ bills, initialIndex, reportId, onClos
             </div>
 
             {/* Tabs */}
-            <div className={styles.tabs}>
+            <div className="tabs">
               <button
-                className={`${styles.tab}${activeTab === 'details' ? ` ${styles.activeTab}` : ''}`}
+                className={`tab${activeTab === 'details' ? ' activeTab' : ''}`}
                 onClick={() => setActiveTab('details')}
               >
                 Details
               </button>
               <button
-                className={`${styles.tab}${activeTab === 'comments' ? ` ${styles.activeTab}` : ''}`}
+                className={`tab${activeTab === 'comments' ? ' activeTab' : ''}`}
                 onClick={() => setActiveTab('comments')}
               >
                 Comments
@@ -217,73 +217,73 @@ export default function BillPreviewModal({ bills, initialIndex, reportId, onClos
             </div>
 
             {activeTab === 'details' ? (
-              <div className={styles.detailsContent}>
-                <div className={styles.detailRow}>
-                  <div className={styles.detailGroup}>
-                    <span className={styles.detailLabel}>Client Name</span>
-                    <span className={styles.detailValue}>{bill.clientName || '-'}</span>
+              <div className="detailsContent">
+                <div className="detailRow">
+                  <div className="detailGroup">
+                    <span className="detailLabel">Client Name</span>
+                    <span className="detailValue">{bill.clientName || '-'}</span>
                   </div>
-                  <div className={styles.detailGroup}>
-                    <span className={styles.detailLabel}>Project ID</span>
-                    <span className={styles.detailValue}>{bill.projectId || '-'}</span>
-                  </div>
-                </div>
-
-                <div className={styles.divider} />
-
-                <div className={styles.detailRow}>
-                  <div className={styles.detailGroup}>
-                    <span className={styles.detailLabel}>Wallet</span>
-                    <span className={styles.detailValue}>{bill.wallet}</span>
-                  </div>
-                  <div className={styles.detailGroup}>
-                    <span className={styles.detailLabel}>Category</span>
-                    <span className={styles.detailValue}>{bill.category}</span>
+                  <div className="detailGroup">
+                    <span className="detailLabel">Project ID</span>
+                    <span className="detailValue">{bill.projectId || '-'}</span>
                   </div>
                 </div>
 
-                <div className={styles.detailRow} style={{ gridTemplateColumns: '1fr' }}>
-                  <div className={styles.detailGroup}>
-                    <span className={styles.detailLabel}>Merchant</span>
-                    <span className={styles.detailValue}>{bill.merchant}</span>
+                <div className="divider" />
+
+                <div className="detailRow">
+                  <div className="detailGroup">
+                    <span className="detailLabel">Wallet</span>
+                    <span className="detailValue">{bill.wallet}</span>
+                  </div>
+                  <div className="detailGroup">
+                    <span className="detailLabel">Category</span>
+                    <span className="detailValue">{bill.category}</span>
                   </div>
                 </div>
 
-                <div className={styles.detailRow} style={{ gridTemplateColumns: '1fr' }}>
-                  <div className={styles.detailGroup}>
-                    <span className={styles.detailLabel}>Remarks</span>
-                    <span className={styles.detailValueDark}>{bill.remarks || '-'}</span>
+                <div className="detailRow" style={{ gridTemplateColumns: '1fr' }}>
+                  <div className="detailGroup">
+                    <span className="detailLabel">Merchant</span>
+                    <span className="detailValue">{bill.merchant}</span>
+                  </div>
+                </div>
+
+                <div className="detailRow" style={{ gridTemplateColumns: '1fr' }}>
+                  <div className="detailGroup">
+                    <span className="detailLabel">Remarks</span>
+                    <span className="detailValueDark">{bill.remarks || '-'}</span>
                   </div>
                 </div>
               </div>
             ) : (
-              <div className={styles.commentsContent}>
-                <div className={styles.commentsList}>
+              <div className="commentsContent">
+                <div className="commentsList">
                   {bill.comments.length === 0 ? (
                     <div style={{ color: 'var(--text-muted)', fontSize: 13, textAlign: 'center', paddingTop: 20 }}>
                       No comments yet.
                     </div>
                   ) : (
                     bill.comments.map((c) => (
-                      <div key={c.id} className={styles.comment}>
-                        <div className={styles.commentHeader}>
+                      <div key={c.id} className="comment">
+                        <div className="commentHeader">
                           <Avatar initials={c.initials} size="sm" />
-                          <span className={styles.commentAuthor}>{c.author}</span>
-                          <span className={styles.commentTime}>{c.timestamp}</span>
+                          <span className="commentAuthor">{c.author}</span>
+                          <span className="commentTime">{c.timestamp}</span>
                         </div>
-                        <div className={styles.commentText}>{c.text}</div>
+                        <div className="commentText">{c.text}</div>
                       </div>
                     ))
                   )}
                 </div>
-                <div className={styles.commentInput}>
+                <div className="commentInput">
                   <input
                     value={commentText}
                     onChange={(e) => setCommentText(e.target.value)}
                     placeholder="Add New Comment"
                     onKeyDown={(e) => e.key === 'Enter' && handleAddComment()}
                   />
-                  <button className={styles.addCommentBtn} onClick={handleAddComment}>
+                  <button className="addCommentBtn" onClick={handleAddComment}>
                     Add
                   </button>
                 </div>
@@ -297,7 +297,7 @@ export default function BillPreviewModal({ bills, initialIndex, reportId, onClos
         ref={fileInputRef}
         type="file"
         accept={ACCEPTED_FILE_TYPES}
-        className={styles.fileInput}
+        className="fileInput"
         onChange={handleFileChange}
       />
     </div>

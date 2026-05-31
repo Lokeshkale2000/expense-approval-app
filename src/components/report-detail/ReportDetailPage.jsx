@@ -1,25 +1,18 @@
 import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import {
-  ArrowLeft,
-  RefreshCw,
-  ArrowDownUp,
-  Search,
-  Download,
-} from "lucide-react";
+import { ArrowLeft, RefreshCw, ArrowDownUp, Search, Download } from "lucide-react";
 import { useExpense } from "../../context/ExpenseContext";
 import Avatar from "../ui/Avatar";
 import Badge from "../ui/Badge";
 import BillItem from "./BillItem";
 import BillPreviewModal from "../bill-preview/BillPreviewModal";
 import { formatAmount } from "../../utils/helpers";
-import styles from "./ReportDetailPage.module.css";
+import "./ReportDetailPage.css";
 
 export default function ReportDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { reports, approveReport, rejectReport, approveBill, rejectBill } =
-    useExpense();
+  const { reports, approveReport, rejectReport, approveBill, rejectBill } = useExpense();
   const [activeTab, setActiveTab] = useState("expenses");
   const [search, setSearch] = useState("");
   const [previewBillId, setPreviewBillId] = useState(null);
@@ -27,18 +20,14 @@ export default function ReportDetailPage() {
 
   const toggleSelect = (billId) =>
     setSelectedIds((prev) =>
-      prev.includes(billId)
-        ? prev.filter((id) => id !== billId)
-        : [...prev, billId],
+      prev.includes(billId) ? prev.filter((id) => id !== billId) : [...prev, billId],
     );
 
   const report = reports.find((r) => r.id === id);
 
   if (!report) {
     return (
-      <div
-        style={{ padding: 40, textAlign: "center", color: "var(--text-muted)" }}
-      >
+      <div style={{ padding: 40, textAlign: "center", color: "var(--text-muted)" }}>
         Report not found. <Link to="/">Go back</Link>
       </div>
     );
@@ -48,68 +37,56 @@ export default function ReportDetailPage() {
     (b) => !search || b.title.toLowerCase().includes(search.toLowerCase()),
   );
 
-  const previewBillIndex = report.bills.findIndex(
-    (b) => b.id === previewBillId,
-  );
+  const previewBillIndex = report.bills.findIndex((b) => b.id === previewBillId);
 
   return (
-    <div className={styles.page}>
+    <div className="page">
       {/* Breadcrumb */}
-      <div className={styles.breadcrumb}>
+      <div className="breadcrumb">
         <button onClick={() => navigate("/expenses/all")}>
           <ArrowLeft size={13} /> Bill Approver
         </button>
-        <span className={styles.breadcrumbSep}>/</span>
+        <span className="breadcrumbSep">/</span>
         <Link to="#">Dec-2025</Link>
-        <span className={styles.breadcrumbSep}>/</span>
+        <span className="breadcrumbSep">/</span>
         <span>View Report</span>
       </div>
 
-      <div className={styles.content}>
+      <div className="content">
         {/* Employee header card */}
-        <div className={styles.employeeCard}>
-          <div className={styles.empInfo}>
+        <div className="employeeCard">
+          <div className="empInfo">
             <Avatar initials={report.employee.initials} size="lg" />
-            <div className={styles.empDetails}>
-              <span className={styles.empIdText}>
-                Emp. ID - {report.employee.empId.replace("EMP-", "")}
-              </span>
-              <span className={styles.empName}>{report.employee.name}</span>
+            <div className="empDetails">
+              <span className="empIdText">Emp. ID - {report.employee.empId.replace("EMP-", "")}</span>
+              <span className="empName">{report.employee.name}</span>
             </div>
-            <div className={styles.empDivider} />
-            <div className={styles.empMeta}>
-              <div className={styles.empMetaGroup}>
-                <span className={styles.empMetaLabel}>Grade</span>
-                <span className={styles.empMetaValue}>
-                  {report.employee.grade}
-                </span>
+            <div className="empDivider" />
+            <div className="empMeta">
+              <div className="empMetaGroup empMetaGroupBorder">
+                <span className="empMetaLabel">Grade</span>
+                <span className="empMetaValue">{report.employee.grade}</span>
               </div>
-              <div className={styles.empMetaGroup}>
-                <span className={styles.empMetaLabel}>Department</span>
-                <span className={styles.empMetaValue}>
-                  {report.employee.department}
-                </span>
+              <div className="empMetaGroup empMetaGroupBorder">
+                <span className="empMetaLabel">Department</span>
+                <span className="empMetaValue">{report.employee.department}</span>
               </div>
-              <div className={styles.empMetaGroup}>
-                <span className={styles.empMetaLabel}>Email ID</span>
-                <span className={styles.empMetaValue}>
-                  {report.employee.email}
-                </span>
+              <div className="empMetaGroup">
+                <span className="empMetaLabel">Email ID</span>
+                <span className="empMetaValue">{report.employee.email}</span>
               </div>
             </div>
           </div>
 
-          <div className={styles.headerActions}>
-            <button className={styles.btnDownload} title="Download report">
+          <div className="headerActions">
+            <button className="btnDownload" title="Download report">
               <Download size={15} />
             </button>
             <button
-              className={styles.btnRejectReport}
+              className="btnRejectReport"
               onClick={() => {
                 if (selectedIds.length > 0) {
-                  selectedIds.forEach((billId) =>
-                    rejectBill(report.id, billId),
-                  );
+                  selectedIds.forEach((billId) => rejectBill(report.id, billId));
                   setSelectedIds([]);
                 } else {
                   rejectReport(report.id);
@@ -119,12 +96,10 @@ export default function ReportDetailPage() {
               Reject
             </button>
             <button
-              className={styles.btnApproveReport}
+              className="btnApproveReport"
               onClick={() => {
                 if (selectedIds.length > 0) {
-                  selectedIds.forEach((billId) =>
-                    approveBill(report.id, billId),
-                  );
+                  selectedIds.forEach((billId) => approveBill(report.id, billId));
                   setSelectedIds([]);
                 } else {
                   approveReport(report.id);
@@ -137,55 +112,47 @@ export default function ReportDetailPage() {
         </div>
 
         {/* Report summary */}
-        <div className={styles.reportSummaryRow}>
-          <div className={styles.reportTitleGroup}>
-            <span className={styles.reportTitle}>{report.reportName}</span>
+        <div className="reportSummaryRow">
+          <div className="reportTitleGroup">
+            <span className="reportTitle">{report.reportName}</span>
             <Badge status={report.status} />
           </div>
-          <div className={styles.amountGroup}>
-            <div className={styles.amountBox}>
-              <span className={styles.amountLabel}>Total Amount</span>
-              <span className={styles.amountValue}>
-                {formatAmount(report.totalAmount)}
-              </span>
+          <div className="amountGroup">
+            <div className="amountBox">
+              <span className="amountLabel">Total Amount</span>
+              <span className="amountValue">{formatAmount(report.totalAmount)}</span>
             </div>
-            <div className={styles.amountBox}>
-              <span className={styles.amountLabel}>Amount Approved</span>
-              <span className={styles.amountValue}>
-                {formatAmount(report.approvedAmount)}
-              </span>
+            <div className="amountBox">
+              <span className="amountLabel">Amount Approved</span>
+              <span className="amountValue">{formatAmount(report.approvedAmount)}</span>
             </div>
           </div>
         </div>
 
         {/* Main layout */}
-        <div className={styles.mainLayout}>
+        <div className="mainLayout">
           {/* Bills panel */}
-          <div className={styles.billsPanel}>
-            <div className={styles.billsToolbar}>
-              <div className={styles.tabs}>
+          <div className="billsPanel">
+            <div className="billsToolbar">
+              <div className="tabs">
                 <button
-                  className={`${styles.tab}${activeTab === "expenses" ? ` ${styles.activeTab}` : ""}`}
+                  className={`tab${activeTab === "expenses" ? " activeTab" : ""}`}
                   onClick={() => setActiveTab("expenses")}
                 >
                   Expenses
                 </button>
                 <button
-                  className={`${styles.tab}${activeTab === "mileage" ? ` ${styles.activeTab}` : ""}`}
+                  className={`tab${activeTab === "mileage" ? " activeTab" : ""}`}
                   onClick={() => setActiveTab("mileage")}
                 >
                   Mileage Expense
                 </button>
               </div>
 
-              <div className={styles.billsToolbarRight}>
-                <button className={styles.iconBtn} title="Refresh">
-                  <RefreshCw size={13} />
-                </button>
-                <button className={styles.iconBtn} title="Sort">
-                  <ArrowDownUp size={13} />
-                </button>
-                <div className={styles.searchWrap}>
+              <div className="billsToolbarRight">
+                <button className="iconBtn" title="Refresh"><RefreshCw size={13} /></button>
+                <button className="iconBtn" title="Sort"><ArrowDownUp size={13} /></button>
+                <div className="searchWrap">
                   <Search size={13} color="var(--text-muted)" />
                   <input
                     value={search}
@@ -196,13 +163,11 @@ export default function ReportDetailPage() {
               </div>
             </div>
 
-            <div className={styles.billsList}>
+            <div className="billsList">
               {activeTab === "mileage" ? (
-                <div className={styles.emptyBills}>
-                  No mileage expenses added.
-                </div>
+                <div className="emptyBills">No mileage expenses added.</div>
               ) : filteredBills.length === 0 ? (
-                <div className={styles.emptyBills}>No expenses found.</div>
+                <div className="emptyBills">No expenses found.</div>
               ) : (
                 filteredBills.map((bill) => (
                   <BillItem
@@ -219,34 +184,29 @@ export default function ReportDetailPage() {
           </div>
 
           {/* Right sidebar */}
-          <div className={styles.sidebar}>
-            <div className={styles.sideCard}>
-              <div className={styles.sideCardTitle}>Approver:</div>
-              <div className={styles.approverRow}>
+          <div className="sidebar">
+            <div className="sideCard">
+              <div className="sideCardTitle">Approver:</div>
+              <div className="approverRow">
                 <Avatar initials={report.approver.initials} size="sm" />
-                <span className={styles.approverName}>
-                  {report.approver.name}
-                </span>
+                <span className="approverName">{report.approver.name}</span>
               </div>
-              <button className={styles.sideLink}>View Report History</button>
+              <button className="sideLink">View Report History</button>
             </div>
 
-            <div className={styles.sideCard}>
-              <div className={styles.sideCardTitle}>Wallet Policies</div>
-              <div className={styles.sideValue}>{report.walletPolicies}</div>
+            <div className="sideCard">
+              <div className="sideCardTitle">Wallet Policies</div>
+              <div className="sideValue">{report.walletPolicies}</div>
             </div>
 
-            <div className={styles.sideCard}>
-              <div className={styles.sideCardTitle}>Additional Documents</div>
-              <div className={styles.sideValue}>
-                {report.additionalDocuments ?? "-"}
-              </div>
+            <div className="sideCard">
+              <div className="sideCardTitle">Additional Documents</div>
+              <div className="sideValue">{report.additionalDocuments ?? "-"}</div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bill Preview Modal */}
       {previewBillId && (
         <BillPreviewModal
           bills={report.bills}
