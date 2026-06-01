@@ -1,4 +1,4 @@
-.sidebar {
+.sb-sidebar {
   width: var(--sidebar-width);
   min-height: 100vh;
   background: var(--bg-white);
@@ -12,7 +12,7 @@
   overflow-y: auto;
 }
 
-.logo {
+.sb-logo {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -20,7 +20,7 @@
   border-bottom: 1px solid var(--border-light);
 }
 
-.logoIcon {
+.sb-logoIcon {
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -31,11 +31,9 @@
   flex-shrink: 0;
 }
 
-.logoIcon svg {
-  color: white;
-}
+.sb-logoIcon svg { color: white; }
 
-.logoText {
+.sb-logoText {
   font-size: 18px;
   font-weight: 700;
   background: linear-gradient(135deg, #6C3CE8, #EC4899);
@@ -44,13 +42,13 @@
   background-clip: text;
 }
 
-.gridIcon {
+.sb-gridIcon {
   margin-left: auto;
   color: var(--text-muted);
   cursor: pointer;
 }
 
-.nav {
+.sb-nav {
   flex: 1;
   padding: 12px 10px;
   display: flex;
@@ -58,7 +56,7 @@
   gap: 2px;
 }
 
-.navItem {
+.sb-navItem {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -72,35 +70,33 @@
   text-decoration: none;
 }
 
-.navItem:hover {
+.sb-navItem:hover {
   background: var(--primary-lighter);
   color: var(--primary);
 }
 
-.navItem.active {
+.sb-navItem.sb-active {
   background: var(--primary-lighter);
   color: var(--primary);
   font-weight: 600;
 }
 
-.navItem.active svg,
-.navItem:hover svg {
-  color: var(--primary);
-}
+.sb-navItem.sb-active svg,
+.sb-navItem:hover svg { color: var(--primary); }
 
-.navItem svg {
+.sb-navItem svg {
   width: 17px;
   height: 17px;
   flex-shrink: 0;
 }
 
-.divider {
+.sb-divider {
   height: 1px;
   background: var(--border-light);
   margin: 8px 10px;
 }
 
-.footer {
+.sb-footer {
   padding: 14px 14px 18px;
   border-top: 1px solid var(--border-light);
   display: flex;
@@ -108,7 +104,7 @@
   gap: 10px;
 }
 
-.footerAvatar {
+.sb-footerAvatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -116,11 +112,9 @@
   flex-shrink: 0;
 }
 
-.footerInfo {
-  overflow: hidden;
-}
+.sb-footerInfo { overflow: hidden; }
 
-.footerName {
+.sb-footerName {
   font-size: 12.5px;
   font-weight: 600;
   color: var(--text-primary);
@@ -129,7 +123,7 @@
   text-overflow: ellipsis;
 }
 
-.footerEmail {
+.sb-footerEmail {
   font-size: 11px;
   color: var(--text-muted);
   white-space: nowrap;

@@ -1,219 +1,174 @@
-.item {
+.bi-item {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--border-light);
+  gap: 20px;
+  padding: 18px;
+  border: 1px solid #e4e4e4;
+  border-radius: 12px;
+  background: #fff;
 }
 
-.item:last-child {
-  border-bottom: none;
-}
-
-/* ── Checkbox ── */
-.checkbox {
-  margin-top: 4px;
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
+.bi-checkbox {
+  margin-top: 12px;
+  width: 18px;
+  height: 18px;
   cursor: pointer;
-  accent-color: var(--primary);
+  flex-shrink: 0;
 }
 
-/* ── Preview Box ── */
-.preview {
-  width: 88px;
-  height: 88px;
-  border: 1.5px dashed var(--border);
-  border-radius: var(--radius-md);
+.bi-preview {
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  cursor: pointer;
+
+  border: 2px dashed #d8d8d8;
+  border-radius: 8px;
+  background: #fafafa;
   overflow: hidden;
-  background: #FAFAFA;
-  transition: border-color 0.15s;
 }
 
-.preview:hover {
-  border-color: var(--primary);
-}
-
-.previewImage {
+.bi-previewImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.previewPlaceholder {
-  font-size: 11px;
-  color: var(--text-muted);
+.bi-previewPlaceholder {
+  color: #b3b3b3;
+  font-size: 18px;
   text-align: center;
-  padding: 4px;
-  line-height: 1.4;
 }
 
-.previewUpload {
-  font-size: 10px;
-  color: var(--primary);
-  margin-top: 2px;
-  font-weight: 500;
-}
-
-.fileInput {
-  display: none;
-}
-
-/* ── Body ── */
-.body {
+.bi-content {
   flex: 1;
   min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
 }
 
-.meta {
-  font-size: 11.5px;
-  color: var(--text-muted);
-}
-
-/* ── Main content row ── */
-.bodyMain {
-  display: flex;
-  align-items: stretch;
-  gap: 0;
-  flex: 1;
-}
-
-/* ── Left section: title + actions ── */
-.titleSection {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 160px;
-  flex-shrink: 0;
-  padding-right: 24px;
-}
-
-.billTitle {
+.bi-meta {
   font-size: 14px;
-  font-weight: 600;
-  color: var(--primary);
-  cursor: pointer;
-  line-height: 1.3;
+  color: #666;
+  margin-bottom: 18px;
 }
 
-.billTitle:hover {
+.bi-main {
+  display: flex;
+  gap: 70px;
+  align-items: flex-start;
+}
+
+.bi-titleSection {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.bi-billTitle {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: #4022c9;
+  cursor: pointer;
+  margin-bottom: 18px;
+}
+
+.bi-billTitle:hover {
   text-decoration: underline;
 }
 
-.actionBtns {
+.bi-actionBtns {
   display: flex;
-  gap: 6px;
+  gap: 10px;
 }
 
-.btnReject {
-  padding: 4px 14px;
-  border-radius: 20px;
-  border: 1.5px solid var(--status-rejected-text);
-  color: var(--status-rejected-text);
-  background: transparent;
-  font-size: 12px;
-  font-weight: 500;
+.bi-btnReject {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 22px;
+  border: 2px solid #df3b32;
+  color: #df3b32;
+  background: #fff;
   cursor: pointer;
-  transition: background 0.15s;
-}
-
-.btnReject:hover {
-  background: var(--status-rejected-bg);
-}
-
-.btnAccept {
-  padding: 4px 14px;
-  border-radius: 20px;
-  border: 1.5px solid var(--status-approved-text);
-  color: var(--status-approved-text);
-  background: transparent;
-  font-size: 12px;
   font-weight: 500;
+}
+
+.bi-btnReject:hover {
+  background: #fff2f2;
+}
+
+.bi-btnAccept {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 22px;
+  border: 2px solid #2aa55d;
+  color: #2aa55d;
+  background: #fff;
   cursor: pointer;
-  transition: background 0.15s;
+  font-weight: 500;
 }
 
-.btnAccept:hover {
-  background: var(--status-approved-bg);
+.bi-btnAccept:hover {
+  background: #f1fff7;
 }
 
-/* ── Middle section: wallet | category | merchant ── */
-.detailSection {
-  flex: 1;
+.bi-info {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto auto auto;
-  column-gap: 24px;
-  row-gap: 2px;
-  align-content: start;
+  grid-template-columns: 180px 180px;
+
+  margin-top: -40px;
+  margin-left: -100px;
 }
 
-/* Wallet label: row 1, col 1 */
-.walletLabel  { grid-column: 1; grid-row: 1; }
-/* Category label: row 1, col 2 */
-.categoryLabel { grid-column: 2; grid-row: 1; }
-/* Wallet value: row 2, col 1 */
-.walletValue  { grid-column: 1; grid-row: 2; }
-/* Category value: row 2, col 2 */
-.categoryValue { grid-column: 2; grid-row: 2; }
-/* Merchant label: row 3, col 1 */
-.merchantLabel { grid-column: 1; grid-row: 3; margin-top: 8px; }
-/* Merchant value: row 4, col 1 */
-.merchantValue { grid-column: 1; grid-row: 4; }
-
-.detailLabel {
-  font-size: 11px;
-  color: var(--text-muted);
-  font-weight: 400;
+.bi-infoBlock {
+  display: flex;
+  flex-direction: column;
 }
 
-.detailValue {
-  font-size: 13px;
-  color: var(--primary);
+.bi-detailLabel {
+  font-size: 14px;
+  color: #666;
+  gap:40px
+}
+
+.bi-detailValue {
+  font-size: 16px;
+  color: #4022c9;
   font-weight: 500;
+  margin-top: 12px;
+ 
+  
 }
 
-/* ── Right section: amount on top, view details on bottom ── */
-.amountCol {
+.bi-amountCol {
+  width: 180px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
+  align-self: stretch;
   flex-shrink: 0;
-  padding-left: 24px;
-  min-width: 100px;
 }
 
-.amountBlock {
+.bi-amountBlock {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  align-items: flex-start;
 }
 
-.amountValue {
-  font-size: 14px;
-  color: var(--primary);
+.bi-amountValue {
+  font-size: 20px;
   font-weight: 700;
+  color: #4022c9;
 }
 
-.viewDetails {
-  font-size: 12.5px;
-  color: var(--primary);
-  cursor: pointer;
-  font-weight: 500;
-  white-space: nowrap;
+.bi-viewDetails {
+  font-size: 14px;
+  color: #4022c9;
   text-decoration: underline;
+  cursor: pointer;
 }
 
-.viewDetails:hover {
-  opacity: 0.75;
+.bi-viewDetails:hover {
+  opacity: 0.8;
 }

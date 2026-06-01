@@ -33,31 +33,31 @@ export default function ReportsPage() {
   });
 
   return (
-    <div className="page">
-      <div className="breadcrumb">
+    <div className="rp-page">
+      <div className="rp-breadcrumb">
         <Link to="#">Bill Approver</Link>
-        <span className="breadcrumbSep">›</span>
+        <span className="rp-breadcrumbSep">›</span>
         <span>Dec-2025</span>
       </div>
 
-      <div className="content">
-        <div className="header">
-          <h1 className="title">Reports</h1>
+      <div className="rp-content">
+        <div className="rp-header">
+          <h1 className="rp-title">Reports</h1>
         </div>
 
-        <div className="tableContainer">
-          <div className="toolbar">
-            <div className="tabs">
+        <div className="rp-tableContainer">
+          <div className="rp-toolbar">
+            <div className="rp-tabs">
               {TABS.map((tab) => (
                 <button
                   key={tab.key}
-                  className={`tab${activeTab === tab.key ? ' activeTab' : ''}`}
+                  className={`rp-tab${activeTab === tab.key ? ' rp-activeTab' : ''}`}
                   onClick={() =>
                     navigate(tab.key === 'pending' ? '/expenses/pending' : '/expenses/all')
                   }
                 >
                   {tab.label}
-                  <span className="tabCount">
+                  <span className="rp-tabCount">
                     {tab.key === 'pending' ? `0${pendingCount}` : reports.length}
                   </span>
                   {tab.key === 'all' && <ChevronDown size={14} />}
@@ -65,22 +65,18 @@ export default function ReportsPage() {
               ))}
             </div>
 
-            <div className="toolbarRight">
-              <button className="iconBtn" title="Refresh"><RefreshCw size={14} /></button>
-              <button className="iconBtn" title="Sort"><ArrowDownUp size={14} /></button>
-              <div className="searchWrap">
-                <input
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search here..."
-                />
+            <div className="rp-toolbarRight">
+              <button className="rp-iconBtn" title="Refresh"><RefreshCw size={14} /></button>
+              <button className="rp-iconBtn" title="Sort"><ArrowDownUp size={14} /></button>
+              <div className="rp-searchWrap">
+                <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search here..." />
                 <Search size={14} color="var(--text-muted)" />
               </div>
             </div>
           </div>
 
-          <div className="tableWrap">
-            <table className="table">
+          <div className="rp-tableWrap">
+            <table className="rp-table">
               <thead>
                 <tr>
                   <th>SR NO.</th>
@@ -94,43 +90,37 @@ export default function ReportsPage() {
               </thead>
               <tbody>
                 {filtered.length === 0 ? (
-                  <tr>
-                    <td colSpan={7}>
-                      <div className="emptyState">No reports found.</div>
-                    </td>
-                  </tr>
+                  <tr><td colSpan={7}><div className="rp-emptyState">No reports found.</div></td></tr>
                 ) : (
                   filtered.map((report) => (
                     <tr key={report.id}>
-                      <td><span className="srNo">{report.srNo}</span></td>
+                      <td><span className="rp-srNo">{report.srNo}</span></td>
                       <td>
-                        <div className="employeeCell">
-                          <div className="employeeInfo">
+                        <div className="rp-employeeCell">
+                          <div className="rp-employeeInfo">
                             <Avatar initials={report.employee.initials} size="sm" />
-                            <span className="employeeName">{report.employee.name}</span>
+                            <span className="rp-employeeName">{report.employee.name}</span>
                           </div>
-                          <div className="employeeId">
-                            Emp. ID - {report.employee.empId.replace('EMP-', '')}
-                          </div>
+                          <div className="rp-employeeId">Emp. ID - {report.employee.empId.replace('EMP-', '')}</div>
                         </div>
                       </td>
                       <td>
-                        <div className="reportCell">
-                          <span className="reportLink" onClick={() => navigate(`/expenses/report/${report.id}`)}>
+                        <div className="rp-reportCell">
+                          <span className="rp-reportLink" onClick={() => navigate(`/expenses/report/${report.id}`)}>
                             {report.reportName}
                           </span>
-                          <span className="uploadDate">Uploaded on - {report.uploadedOn}</span>
+                          <span className="rp-uploadDate">Uploaded on - {report.uploadedOn}</span>
                         </div>
                       </td>
-                      <td><span className="billCount">{report.bills.length}</span></td>
+                      <td><span className="rp-billCount">{report.bills.length}</span></td>
                       <td>
-                        <div className="approverCell">
+                        <div className="rp-approverCell">
                           <Avatar initials={report.approver.initials} size="sm" />
                           {report.approver.name}
                         </div>
                       </td>
                       <td><Badge status={report.status} /></td>
-                      <td><span className="amount">{formatAmount(report.totalAmount)}</span></td>
+                      <td><span className="rp-amount">{formatAmount(report.totalAmount)}</span></td>
                     </tr>
                   ))
                 )}

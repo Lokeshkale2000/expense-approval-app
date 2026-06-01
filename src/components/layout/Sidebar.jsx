@@ -23,19 +23,19 @@ const BOTTOM_ITEMS = [
 export default function Sidebar() {
   const location = useLocation();
   return (
-    <aside className="sidebar">
-      <div className="logo">
-        <div className="logoIcon">
+    <aside className="sb-sidebar">
+      <div className="sb-logo">
+        <div className="sb-logoIcon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
             <circle cx="12" cy="12" r="8" stroke="white" strokeWidth="2.5" fill="none" />
             <circle cx="12" cy="12" r="3" fill="white" />
           </svg>
         </div>
-        <span className="logoText">OptiFii</span>
-        <Grid3X3 size={16} className="gridIcon" />
+        <span className="sb-logoText">OptiFii</span>
+        <Grid3X3 size={16} className="sb-gridIcon" />
       </div>
 
-      <nav className="nav">
+      <nav className="sb-nav">
         {NAV_ITEMS.map(({ label, icon: Icon, to, base }) => (
           <NavLink
             key={label}
@@ -44,7 +44,7 @@ export default function Sidebar() {
               const isActive = base
                 ? location.pathname.startsWith(base)
                 : location.pathname === to;
-              return `navItem${isActive ? ' active' : ''}`;
+              return `sb-navItem${isActive ? ' sb-active' : ''}`;
             }}
           >
             <Icon size={17} />
@@ -52,13 +52,13 @@ export default function Sidebar() {
           </NavLink>
         ))}
 
-        <div className="divider" />
+        <div className="sb-divider" />
 
         {BOTTOM_ITEMS.map(({ label, icon: Icon, to }) => (
           <NavLink
             key={label}
             to={to}
-            className={({ isActive }) => `navItem${isActive ? ' active' : ''}`}
+            className={({ isActive }) => `sb-navItem${isActive ? ' sb-active' : ''}`}
           >
             <Icon size={17} />
             {label}
@@ -66,11 +66,11 @@ export default function Sidebar() {
         ))}
       </nav>
 
-      <div className="footer">
-        <div className="footerAvatar" />
-        <div className="footerInfo">
-          <div className="footerName">Giftryt Ventures Pvt. Ltd.</div>
-          <div className="footerEmail">team@giftryt.com</div>
+      <div className="sb-footer">
+        <div className="sb-footerAvatar" />
+        <div className="sb-footerInfo">
+          <div className="sb-footerName">Giftryt Ventures Pvt. Ltd.</div>
+          <div className="sb-footerEmail">team@giftryt.com</div>
         </div>
       </div>
     </aside>

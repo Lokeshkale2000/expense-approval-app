@@ -1,4 +1,4 @@
-.badge {
+.bdg-badge {
   display: inline-flex;
   align-items: center;
   padding: 4px 8px;
@@ -8,22 +8,7 @@
   white-space: nowrap;
 }
 
-.pending {
-  background: var(--status-pending-bg);
-  color: var(--status-pending-text);
-}
-
-.approved {
-  background: var(--status-approved-bg);
-  color: var(--status-approved-text);
-}
-
-.rejected {
-  background: var(--status-rejected-bg);
-  color: var(--status-rejected-text);
-}
-
-.partial {
-  background: var(--status-partial-bg);
-  color: var(--status-partial-text);
-}
+.bdg-pending  { background: var(--status-pending-bg);  color: var(--status-pending-text); }
+.bdg-approved { background: var(--status-approved-bg); color: var(--status-approved-text); }
+.bdg-rejected { background: var(--status-rejected-bg); color: var(--status-rejected-text); }
+.bdg-partial  { background: var(--status-partial-bg);  color: var(--status-partial-text); }

@@ -17,9 +17,9 @@ export default function App() {
   return (
     <ExpenseProvider>
       <BrowserRouter>
-        <div className="layout">
+        <div className="app-layout">
           <Sidebar />
-          <main className="main">
+          <main className="app-main">
             <Routes>
               <Route path="/expenses" element={<ReportsPage />} />
               <Route path="/expenses/all" element={<ReportsPage />} />

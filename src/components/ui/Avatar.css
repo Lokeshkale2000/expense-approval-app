@@ -1,4 +1,4 @@
-.avatar {
+.av-avatar {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -10,20 +10,6 @@
   letter-spacing: 0.3px;
 }
 
-.sm {
-  width: 26px;
-  height: 26px;
-  font-size: 10px;
-}
-
-.md {
-  width: 36px;
-  height: 36px;
-  font-size: 13px;
-}
-
-.lg {
-  width: 44px;
-  height: 44px;
-  font-size: 16px;
-}
+.av-sm { width: 26px; height: 26px; font-size: 10px; }
+.av-md { width: 36px; height: 36px; font-size: 13px; }
+.av-lg { width: 44px; height: 44px; font-size: 16px; }
